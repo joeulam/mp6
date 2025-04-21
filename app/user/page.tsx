@@ -1,9 +1,9 @@
-"use client";
+"use client"
 import { Github } from "@/dataTypes/Github";
 import { Alert, Avatar, Box, Card } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function UserHomePage() {
   const [userData, setUserData] = useState<Github | null>();
@@ -37,6 +37,8 @@ export default function UserHomePage() {
   }, []);
 
   return (
+    <Suspense fallback={<p>Loading user page...</p>}>
+
     <div>
       {errorTag && (
         <Alert severity="error" sx={{ mb: 2 }}>
@@ -81,5 +83,7 @@ export default function UserHomePage() {
         <p>Loading user data...</p>
       )}
     </div>
+    </Suspense>
+
   );
 }
